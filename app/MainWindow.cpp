@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     if (infoExists.exists())
     {
         // Wir müssen definitiv ein Bild in dem Ordner haben.
-        QStringList filter("*.JPG");
+        QStringList filter("*.jpg");
         QDir directory(folderPath);
         QStringList files = directory.entryList(filter);
         QString file = files.at(0); // das erste Ergebnis aus dem Array
@@ -76,7 +76,7 @@ void MainWindow::showImage()
 {
     imgPreview = new ImagePreview(this);
     imgPreview->scrollArea->setFixedSize(QSize(320, 240));
-    imgPreview->setMaximumWidth(240);
+    //imgPreview->setMaximumWidth(240);
     setImage(imagePath);
     setCentralWidget(imgPreview);
 }
