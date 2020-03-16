@@ -6,8 +6,9 @@ GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 while True:
     if (GPIO.input(37) == True):
-        # TODO: break und Bild aufnehmen
         print('Ausgabe')
+        execfile('rpi-light-control.py')
+        break
     else:
         print('Kein Eingang')
-    sleep(1)
+    #sleep(1)
