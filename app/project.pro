@@ -12,4 +12,5 @@ SOURCES += main.cpp \
 HEADERS += MainWindow.h \
             ClickableLabel.h \
             ImagePreview.h \
-            third/QrCode.hpp
+            third/QrCode.hpp \
+            buildtype.h

@@ -2,6 +2,7 @@
 // Copyright (c) 2020 Jan Kowalewicz <jan.kowalewicz@canon.de>.
 
 #include "MainWindow.h"
+#include "buildtype.h"
 #include "third/QrCode.hpp"
 #include <QByteArray>
 #include <QString>
@@ -17,7 +18,11 @@ using namespace qrcodegen;
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     setStyleSheet("background-color: black;");
+#if defined(WORK)
     resize(QSize(1440, 900));
+#elif defined(RELEASE)
+    showFullScreen();
+#endif
     // Wir überprüfen ob in unserem Ordner "new_image" die Datei "info.txt" liegt.
     const QString folderPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/fotobox-app/new_image";
     QFileInfo infoExists(folderPath + "/info.txt");
