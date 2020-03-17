@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QObject>
 #include <QWidget>
+#include <QHBoxLayout>
 
 #include "ImagePreview.h"
 #include <QSvgWidget>
@@ -25,14 +26,19 @@ public:
     void showImage();
     void showQRCode();
 
+#if 0
 public slots:
     void onImgLabelClick();
+#endif
 
 protected:
     QString imagePath;
     QString qrLink;
     ImagePreview *imgPreview;
     QSvgWidget *qrWidget;
+
+    QWidget *centralWidget;
+    QHBoxLayout *mainLayout;
 };
 
 #endif // MAIN_WINDOW_H

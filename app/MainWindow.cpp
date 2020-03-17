@@ -16,7 +16,8 @@ using namespace qrcodegen;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    resize(QSize(320, 240));
+    setStyleSheet("background-color: black;");
+    resize(QSize(1440, 900));
     // Wir überprüfen ob in unserem Ordner "new_image" die Datei "info.txt" liegt.
     const QString folderPath = QStandardPaths::writableLocation(QStandardPaths::HomeLocation) + "/fotobox-app/new_image";
     QFileInfo infoExists(folderPath + "/info.txt");
@@ -44,11 +45,30 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
         // kein Bild...?
     }
 
+    centralWidget = new QWidget(this);
+    mainLayout = new QHBoxLayout(this);
+    mainLayout->setMargin(0);
+    mainLayout->setSpacing(0);
+
+    if (!imagePath.isEmpty())
+    {
+        if (!qrLink.isEmpty())
+        {
+            showImage();
+            showQRCode();
+        }
+    }
+
+    centralWidget->setLayout(mainLayout);
+    setCentralWidget(centralWidget);
+
+#if 0
     if (!imagePath.isEmpty())
     {
         showImage();
         connect(imgPreview->imgLabel, SIGNAL(clicked()), SLOT(onImgLabelClick()));
     }
+#endif
 
 }
 
@@ -75,21 +95,26 @@ bool MainWindow::generateQRCode(const QString &withText)
 void MainWindow::showImage()
 {
     imgPreview = new ImagePreview(this);
-    imgPreview->scrollArea->setFixedSize(QSize(320, 240));
-    //imgPreview->setMaximumWidth(240);
+    //mgPreview->scrollArea->setFixedSize(QSize(640, 480));
+    //imgPreview->setMaximumWidth(720);
     setImage(imagePath);
-    setCentralWidget(imgPreview);
+    //setCentralWidget(imgPreview);
+    mainLayout->addWidget(imgPreview);
 }
 
 void MainWindow::showQRCode()
 {
     qrWidget = new QSvgWidget(this);
-    qrWidget->setMaximumSize(QSize(240, 240));
+    qrWidget->setMaximumSize(QSize(480, 480));
+    qrWidget->setMinimumWidth(480);
     generateQRCode(qrLink);
-    setCentralWidget(qrWidget);
+    //setCentralWidget(qrWidget);
+    mainLayout->addWidget(qrWidget);
 }
 
+#if 0
 void MainWindow::onImgLabelClick()
 {
     showQRCode();
 }
+#endif
