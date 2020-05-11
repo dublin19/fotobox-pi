@@ -21,6 +21,7 @@ def clearForNewImage():
     shutil.rmtree(save_location)
 
 def captureImage():
+    sleep(5)
     os.chdir(save_location)
     gp(captureAndGetCommand)
     for filename in os.listdir(save_location):

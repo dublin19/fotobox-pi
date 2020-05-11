@@ -7,7 +7,7 @@ GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 while True:
     if (GPIO.input(37) == True):
         print('Ausgabe')
-        execfile('rpi-light-control.py')
+        execfile('camera-ftp.py')
         break
     else:
         print('Kein Eingang')

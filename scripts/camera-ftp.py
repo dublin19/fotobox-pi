@@ -29,14 +29,15 @@ def killProc():
             pid = int(line.split(None,1)[0])
             os.kill(pid, signal.SIGKILL)
 
+def clearForNewImage():
+    shutil.rmtree(save_location)
+
 captureAndGetCommand = ["--capture-image-and-download"]
 
 save_location = "/home/fotobox-user/fotobox-app/new_image"
 
-def clearForNewImage():
-    shutil.rmtree(save_location)
-
 def captureImage():
+    sleep(5)
     os.chdir(save_location)
     gp(captureAndGetCommand)
     for filename in os.listdir(save_location):
@@ -52,5 +53,5 @@ if __name__ == "__main__":
     killProc()    
     captureImage()
     ftpUpload()
-    sleep(5)
+    sleep(3)
     startSoftware()
